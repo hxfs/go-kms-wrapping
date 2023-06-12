@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/hashicorp/go-dbw"
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
-	"github.com/hashicorp/go-kms-wrapping/v2/aead"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
+	"github.com/hxfs/go-kms-wrapping/v2/aead"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

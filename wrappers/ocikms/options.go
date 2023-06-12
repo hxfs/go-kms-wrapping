@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 )
 
 const (

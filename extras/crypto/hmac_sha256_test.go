@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
-	"github.com/hashicorp/go-kms-wrapping/v2/extras/crypto"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
+	"github.com/hxfs/go-kms-wrapping/v2/extras/crypto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

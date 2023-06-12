@@ -1,8 +1,22 @@
-package alicloudkms
+package ukms
 
 import (
+	"github.com/hashicorp/go-hclog"
 	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 )
+
+// options = how options are represented
+type options struct {
+	*wrapping.Options
+	withRegion    string
+	withAccessKey string
+	withSecretKey string
+	withProjectId string
+	withLogger    hclog.Logger
+}
+
+// OptionFunc holds a function with local options
+type OptionFunc func(*options) error
 
 // getOpts iterates the inbound Options and returns a struct
 func getOpts(opt ...wrapping.Option) (*options, error) {
@@ -43,16 +57,12 @@ func getOpts(opt ...wrapping.Option) (*options, error) {
 			switch k {
 			case "kms_key_id": // deprecated backend-specific value, set global
 				opts.WithKeyId = v
-			case "region":
-				opts.withRegion = v
-			case "domain":
-				opts.withDomain = v
 			case "access_key":
 				opts.withAccessKey = v
 			case "secret_key":
 				opts.withSecretKey = v
-			case "access_secret":
-				opts.withAccessSecret = v
+			case "projectId":
+				opts.withProjectId = v
 			}
 		}
 	}
@@ -70,71 +80,15 @@ func getOpts(opt ...wrapping.Option) (*options, error) {
 	return &opts, nil
 }
 
-// OptionFunc holds a function with local options
-type OptionFunc func(*options) error
-
-// options = how options are represented
-type options struct {
-	*wrapping.Options
-
-	withRegion       string
-	withDomain       string
-	withAccessKey    string
-	withSecretKey    string
-	withAccessSecret string
-}
-
 func getDefaultOptions() options {
-	return options{
-		withRegion: "cn-beijing",
-	}
+	return options{}
 }
 
-// WithRegion provides a way to chose the region
-func WithRegion(with string) wrapping.Option {
+// WithLogger provides a way to pass in a logger
+func WithLogger(with hclog.Logger) wrapping.Option {
 	return func() interface{} {
 		return OptionFunc(func(o *options) error {
-			o.withRegion = with
-			return nil
-		})
-	}
-}
-
-// WithDomain provides a way to chose the domain
-func WithDomain(with string) wrapping.Option {
-	return func() interface{} {
-		return OptionFunc(func(o *options) error {
-			o.withDomain = with
-			return nil
-		})
-	}
-}
-
-// WithAccessKey provides a way to chose the access key
-func WithAccessKey(with string) wrapping.Option {
-	return func() interface{} {
-		return OptionFunc(func(o *options) error {
-			o.withAccessKey = with
-			return nil
-		})
-	}
-}
-
-// WithSecretKey provides a way to chose the secret key
-func WithSecretKey(with string) wrapping.Option {
-	return func() interface{} {
-		return OptionFunc(func(o *options) error {
-			o.withSecretKey = with
-			return nil
-		})
-	}
-}
-
-// WithAccessSecret provides a way to chose the access secret
-func WithAccessSecret(with string) wrapping.Option {
-	return func() interface{} {
-		return OptionFunc(func(o *options) error {
-			o.withAccessSecret = with
+			o.withLogger = with
 			return nil
 		})
 	}

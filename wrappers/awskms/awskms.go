@@ -13,7 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/kms/kmsiface"
 	cleanhttp "github.com/hashicorp/go-cleanhttp"
 	"github.com/hashicorp/go-hclog"
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 	"github.com/hashicorp/go-secure-stdlib/awsutil"
 )
 

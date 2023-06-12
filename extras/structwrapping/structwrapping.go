@@ -7,7 +7,7 @@ import (
 	"reflect"
 	"strings"
 
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 	"google.golang.org/protobuf/proto"
 )
 

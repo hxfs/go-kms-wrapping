@@ -9,7 +9,7 @@ import (
 	"io"
 	"testing"
 
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 	"github.com/mr-tron/base58"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/crypto/blake2b"

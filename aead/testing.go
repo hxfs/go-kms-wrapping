@@ -5,8 +5,8 @@ import (
 	"crypto/rand"
 	"testing"
 
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
-	"github.com/hashicorp/go-kms-wrapping/v2/extras/multi"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
+	"github.com/hxfs/go-kms-wrapping/v2/extras/multi"
 	"github.com/stretchr/testify/require"
 )
 

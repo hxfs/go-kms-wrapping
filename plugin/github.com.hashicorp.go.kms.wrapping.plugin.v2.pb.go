@@ -7,7 +7,7 @@
 package plugin
 
 import (
-	v2 "github.com/hashicorp/go-kms-wrapping/v2"
+	v2 "github.com/hxfs/go-kms-wrapping/v2"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

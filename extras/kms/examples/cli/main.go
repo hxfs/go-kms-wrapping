@@ -8,9 +8,9 @@ import (
 	"os"
 
 	"github.com/hashicorp/go-dbw"
-	"github.com/hashicorp/go-kms-wrapping/extras/kms/examples/v2"
-	"github.com/hashicorp/go-kms-wrapping/extras/kms/v2"
-	"github.com/hashicorp/go-kms-wrapping/v2/extras/structwrapping"
+	"github.com/hxfs/go-kms-wrapping/extras/kms/examples/v2"
+	"github.com/hxfs/go-kms-wrapping/extras/kms/v2"
+	"github.com/hxfs/go-kms-wrapping/v2/extras/structwrapping"
 )
 
 const globalScope = "global"

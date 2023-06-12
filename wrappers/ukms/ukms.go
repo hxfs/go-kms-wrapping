@@ -1,4 +1,4 @@
-package alicloudkms
+package ukms
 
 import (
 	"context"
@@ -8,22 +8,23 @@ import (
 	"os"
 	"sync/atomic"
 
-	"github.com/aliyun/alibaba-cloud-sdk-go/sdk"
-	"github.com/aliyun/alibaba-cloud-sdk-go/sdk/auth/credentials/providers"
-	"github.com/aliyun/alibaba-cloud-sdk-go/services/kms"
 	wrapping "github.com/hxfs/go-kms-wrapping/v2"
+
+	"github.com/ucloud/ucloud-sdk-go/ucloud"
+	"github.com/ucloud/ucloud-sdk-go/ucloud/auth"
 )
 
 // These constants contain the accepted env vars; the Vault one is for backwards compat
 const (
-	EnvAliCloudKmsWrapperKeyId   = "ALICLOUDKMS_WRAPPER_KEY_ID"
-	EnvVaultAliCloudKmsSealKeyId = "VAULT_ALICLOUDKMS_SEAL_KEY_ID"
+	EnvUCloudKmsWrapperKeyId   = "UCLOUDKMS_WRAPPER_KEY_ID"
+	EnvVaultUCloudKmsSealKeyId = "VAULT_UCLOUDKMS_SEAL_KEY_ID"
 )
 
 // Wrapper is a Wrapper that uses AliCloud's KMS
 type Wrapper struct {
 	client       kmsClient
 	domain       string
+	projectId    string
 	keyId        string
 	currentKeyId *atomic.Value
 }
@@ -55,77 +56,44 @@ func (k *Wrapper) SetConfig(_ context.Context, opt ...wrapping.Option) (*wrappin
 
 	// Check and set KeyId
 	switch {
-	case os.Getenv(EnvAliCloudKmsWrapperKeyId) != "":
-		k.keyId = os.Getenv(EnvAliCloudKmsWrapperKeyId)
-	case os.Getenv(EnvVaultAliCloudKmsSealKeyId) != "":
-		k.keyId = os.Getenv(EnvVaultAliCloudKmsSealKeyId)
+	case os.Getenv(EnvUCloudKmsWrapperKeyId) != "":
+		k.keyId = os.Getenv(EnvUCloudKmsWrapperKeyId)
+	case os.Getenv(EnvVaultUCloudKmsSealKeyId) != "":
+		k.keyId = os.Getenv(EnvVaultUCloudKmsSealKeyId)
 	case opts.WithKeyId != "":
 		k.keyId = opts.WithKeyId
 	default:
-		return nil, fmt.Errorf("key id not found (env or config) for alicloud kms wrapper configuration")
+		return nil, fmt.Errorf("key id not found (env or config) for ucloud kms wrapper configuration")
 	}
 
 	region := ""
 	if k.client == nil {
-		// Check and set region.
-		region = os.Getenv("ALICLOUD_REGION")
-		if region == "" {
-			region = opts.withRegion
-		}
+		cfg := ucloud.NewConfig()
+		cfg.ProjectId = opts.withProjectId
+		cfg.Region = "undefined"
+		cfg.BaseUrl = "https://api.ucloud.cn"
 
-		// A domain isn't required, but it can be used to override the endpoint
-		// returned by the region. An example value for a domain would be:
-		// "kms.us-east-1.aliyuncs.com".
-		k.domain = os.Getenv("ALICLOUD_DOMAIN")
-		if k.domain == "" {
-			k.domain = opts.withDomain
-		}
+		auth := auth.NewCredential()
+		auth.PrivateKey = opts.withSecretKey
+		auth.PublicKey = opts.withAccessKey
 
-		// Build the optional, configuration-based piece of the credential chain.
-		credConfig := &providers.Configuration{
-			AccessKeyID:     opts.withAccessKey,
-			AccessKeySecret: opts.withSecretKey,
-		}
-		if credConfig.AccessKeySecret == "" {
-			credConfig.AccessKeySecret = opts.withAccessSecret
-		}
-
-		credentialChain := []providers.Provider{
-			providers.NewEnvCredentialProvider(),
-			providers.NewConfigurationCredentialProvider(credConfig),
-			providers.NewInstanceMetadataProvider(),
-		}
-		credProvider := providers.NewChainProvider(credentialChain)
-
-		creds, err := credProvider.Retrieve()
-		if err != nil {
-			return nil, err
-		}
-		clientConfig := sdk.NewConfig()
-		clientConfig.Scheme = "https"
-		client, err := kms.NewClientWithOptions(region, clientConfig, creds)
-		if err != nil {
-			return nil, err
-		}
+		client := getUcloudKmsClient(&cfg, &auth)
 		k.client = client
 	}
 
 	// Test the client connection using provided key ID
-	input := kms.CreateDescribeKeyRequest()
-	input.KeyId = k.keyId
-	input.Domain = k.domain
 
-	keyInfo, err := k.client.DescribeKey(input)
+	keyInfo, err := k.client.describeKey(k.keyId)
 	if err != nil {
 		return nil, fmt.Errorf("error fetching AliCloud KMS key information: %w", err)
 	}
-	if keyInfo == nil || keyInfo.KeyMetadata.KeyId == "" {
+	if keyInfo == "" {
 		return nil, errors.New("no key information returned")
 	}
 
 	// Store the current key id. If using a key alias, this will point to the actual
 	// unique key that that was used for this encrypt operation.
-	k.currentKeyId.Store(keyInfo.KeyMetadata.KeyId)
+	k.currentKeyId.Store(k.keyId)
 
 	// Map that holds non-sensitive configuration info
 	wrapConfig := new(wrapping.WrapperConfig)
@@ -149,7 +117,7 @@ func (k *Wrapper) KeyId(_ context.Context) (string, error) {
 	return k.currentKeyId.Load().(string), nil
 }
 
-// Encrypt is used to encrypt the master key using the the AliCloud CMK.
+// Encrypt is used to encrypt the master key using the the ucloud ukms.
 // This returns the ciphertext, and/or any errors from this
 // call. This should be called after the KMS client has been instantiated.
 func (k *Wrapper) Encrypt(_ context.Context, plaintext []byte, opt ...wrapping.Option) (*wrapping.BlobInfo, error) {
@@ -162,26 +130,23 @@ func (k *Wrapper) Encrypt(_ context.Context, plaintext []byte, opt ...wrapping.O
 		return nil, fmt.Errorf("error wrapping data: %w", err)
 	}
 
-	input := kms.CreateEncryptRequest()
-	input.KeyId = k.keyId
-	input.Plaintext = base64.StdEncoding.EncodeToString(env.Key)
-	input.Domain = k.domain
+	Plaintext := base64.StdEncoding.EncodeToString(env.Key)
 
-	output, err := k.client.Encrypt(input)
+	output, err := k.client.encrypt(k.keyId, Plaintext)
 	if err != nil {
 		return nil, fmt.Errorf("error encrypting data: %w", err)
 	}
 
 	// Store the current key id.
-	keyId := output.KeyId
-	k.currentKeyId.Store(keyId)
+
+	k.currentKeyId.Store(k.keyId)
 
 	ret := &wrapping.BlobInfo{
 		Ciphertext: env.Ciphertext,
 		Iv:         env.Iv,
 		KeyInfo: &wrapping.KeyInfo{
-			KeyId:      keyId,
-			WrappedKey: []byte(output.CiphertextBlob),
+			KeyId:      k.keyId,
+			WrappedKey: []byte(output),
 		},
 	}
 
@@ -196,16 +161,15 @@ func (k *Wrapper) Decrypt(_ context.Context, in *wrapping.BlobInfo, opt ...wrapp
 
 	// KeyId is not passed to this call because AliCloud handles this
 	// internally based on the metadata stored with the encrypted data
-	input := kms.CreateDecryptRequest()
-	input.CiphertextBlob = string(in.KeyInfo.WrappedKey)
-	input.Domain = k.domain
 
-	output, err := k.client.Decrypt(input)
+	ciphertextBlob := string(in.KeyInfo.WrappedKey)
+
+	output, err := k.client.decrypt(ciphertextBlob)
 	if err != nil {
 		return nil, fmt.Errorf("error decrypting data encryption key: %w", err)
 	}
 
-	keyBytes, err := base64.StdEncoding.DecodeString(output.Plaintext)
+	keyBytes, err := base64.StdEncoding.DecodeString(output)
 	if err != nil {
 		return nil, err
 	}
@@ -224,7 +188,7 @@ func (k *Wrapper) Decrypt(_ context.Context, in *wrapping.BlobInfo, opt ...wrapp
 }
 
 type kmsClient interface {
-	Decrypt(request *kms.DecryptRequest) (response *kms.DecryptResponse, err error)
-	DescribeKey(request *kms.DescribeKeyRequest) (response *kms.DescribeKeyResponse, err error)
-	Encrypt(request *kms.EncryptRequest) (response *kms.EncryptResponse, err error)
+	describeKey(keyID string) (string, error)
+	encrypt(keyID, plainText string) (string, error)
+	decrypt(cipherText string) (string, error)
 }

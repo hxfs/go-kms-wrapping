@@ -8,7 +8,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 	gp "github.com/hashicorp/go-plugin"
 	grpc "google.golang.org/grpc"
 )

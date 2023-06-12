@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	gkwp "github.com/hashicorp/go-kms-wrapping/plugin/v2"
-	wrapping "github.com/hashicorp/go-kms-wrapping/v2"
+	gkwp "github.com/hxfs/go-kms-wrapping/plugin/v2"
+	wrapping "github.com/hxfs/go-kms-wrapping/v2"
 )
 
 func main() {
