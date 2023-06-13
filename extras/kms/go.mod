@@ -1,4 +1,4 @@
-module github.com/hashicorp/go-kms-wrapping/extras/kms/v2
+module github.com/hxfs/go-kms-wrapping/extras/kms/v2
 
 go 1.17
 
@@ -7,7 +7,7 @@ require (
 	github.com/golang-migrate/migrate/v4 v4.15.1
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/go-dbw v0.0.0-20220910135738-ed4505749995
-	github.com/hashicorp/go-kms-wrapping/v2 v2.0.6-0.20220602193636-404007edfc2b
+	github.com/hxfs/go-kms-wrapping/v2 v2.0.6-0.20220602193636-404007edfc2b
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/hashicorp/go-secure-stdlib/strutil v0.1.2
 	github.com/hashicorp/go-uuid v1.0.3

@@ -1,10 +1,10 @@
-module github.com/hashicorp/go-kms-wrapping/plugin/v2
+module github.com/hxfs/go-kms-wrapping/plugin/v2
 
 go 1.17
 
 require (
 	github.com/hashicorp/go-hclog v1.1.0
-	github.com/hashicorp/go-kms-wrapping/v2 v2.0.4
+	github.com/hxfs/go-kms-wrapping/v2 v2.0.4
 	github.com/hashicorp/go-plugin v1.4.3
 	github.com/hashicorp/go-secure-stdlib/base62 v0.1.2
 	github.com/stretchr/testify v1.7.0

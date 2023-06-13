@@ -1,4 +1,4 @@
-module github.com/hashicorp/go-kms-wrapping/extras/kms/examples/v2
+module github.com/hxfs/go-kms-wrapping/extras/kms/examples/v2
 
 go 1.18
 
@@ -6,9 +6,9 @@ require (
 	github.com/golang-migrate/migrate/v4 v4.15.1
 	github.com/hashicorp/go-dbw v0.0.0-20220412153211-c470aec9369f
 	github.com/hashicorp/go-hclog v1.1.0
-	github.com/hashicorp/go-kms-wrapping/extras/kms/v2 v2.0.0-20220624222051-8353b68ef7f2
-	github.com/hashicorp/go-kms-wrapping/v2 v2.0.6-0.20220602193636-404007edfc2b
-	github.com/hashicorp/go-kms-wrapping/wrappers/transit/v2 v2.0.0
+	github.com/hxfs/go-kms-wrapping/extras/kms/v2 v2.0.0-20220624222051-8353b68ef7f2
+	github.com/hxfs/go-kms-wrapping/v2 v2.0.6-0.20220602193636-404007edfc2b
+	github.com/hxfs/go-kms-wrapping/wrappers/transit/v2 v2.0.0
 	github.com/hashicorp/go-secure-stdlib/configutil/v2 v2.0.3
 	gorm.io/driver/sqlite v1.2.4
 )
@@ -30,7 +30,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
-	github.com/hashicorp/go-kms-wrapping/plugin/v2 v2.0.2 // indirect
+	github.com/hxfs/go-kms-wrapping/plugin/v2 v2.0.2 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-plugin v1.4.3 // indirect
 	github.com/hashicorp/go-retryablehttp v0.6.6 // indirect

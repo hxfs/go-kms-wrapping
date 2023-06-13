@@ -6,8 +6,8 @@ github.com/golang/protobuf v1.5.0/go.mod h1:FsONVRAS9T7sI+LIUmWTfcYkHO4aIWwzhcaS
 github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/go-cmp v0.5.7 h1:81/ik6ipDQS2aGcBfIN5dHDB36BwrStyeAQquSYCV4o=
 github.com/google/go-cmp v0.5.7/go.mod h1:n+brtR0CgQNWTVd5ZUFpTBC8YFBDLK/h/bpaJ8/DtOE=
-github.com/hashicorp/go-kms-wrapping/v2 v2.0.0 h1:hKWzjzqfUi1HtpBEJ9tLKlRya1u6kRQGZAW9OFR+ia8=
-github.com/hashicorp/go-kms-wrapping/v2 v2.0.0/go.mod h1:H+TfVXu/Eyi6Ccs4EoT8pa3gR5lRh12sw4AOq6XkXCg=
+github.com/hxfs/go-kms-wrapping/v2 v2.0.0 h1:hKWzjzqfUi1HtpBEJ9tLKlRya1u6kRQGZAW9OFR+ia8=
+github.com/hxfs/go-kms-wrapping/v2 v2.0.0/go.mod h1:H+TfVXu/Eyi6Ccs4EoT8pa3gR5lRh12sw4AOq6XkXCg=
 github.com/hashicorp/go-uuid v1.0.2 h1:cfejS+Tpcp13yd5nYHWDI6qVCny6wyX2Mt5SGur2IGE=
 github.com/hashicorp/go-uuid v1.0.2/go.mod h1:6SBZvOh/SIDV7/2o3Jml5SYk/TvGqwFJ/bN7x4byOro=
 github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORNo=

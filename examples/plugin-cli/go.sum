@@ -68,10 +68,10 @@ github.com/hashicorp/errwrap v1.1.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brv
 github.com/hashicorp/go-hclog v0.14.1/go.mod h1:whpDNt7SSdeAju8AWKIWsul05p54N/39EeqMAyrmvFQ=
 github.com/hashicorp/go-hclog v1.1.0 h1:QsGcniKx5/LuX2eYoeL+Np3UKYPNaN7YKpTh29h8rbw=
 github.com/hashicorp/go-hclog v1.1.0/go.mod h1:whpDNt7SSdeAju8AWKIWsul05p54N/39EeqMAyrmvFQ=
-github.com/hashicorp/go-kms-wrapping/plugin/v2 v2.0.2 h1:it114Kjpk79JVh6AfxFMP5oi1gb+RPzcSLiG3zF/J0w=
-github.com/hashicorp/go-kms-wrapping/plugin/v2 v2.0.2/go.mod h1:b9mq0bG5xJ10ZcTEQJLZ22O9y71hIt2MGTLqROA/SAM=
-github.com/hashicorp/go-kms-wrapping/v2 v2.0.5 h1:rOFDv+3k05mnW0oaDLffhVUwg03Csn0mvfO98Wdd2bE=
-github.com/hashicorp/go-kms-wrapping/v2 v2.0.5/go.mod h1:sDQAfwJGv25uGPZA04x87ERglCG6avnRcBT9wYoMII8=
+github.com/hxfs/go-kms-wrapping/plugin/v2 v2.0.2 h1:it114Kjpk79JVh6AfxFMP5oi1gb+RPzcSLiG3zF/J0w=
+github.com/hxfs/go-kms-wrapping/plugin/v2 v2.0.2/go.mod h1:b9mq0bG5xJ10ZcTEQJLZ22O9y71hIt2MGTLqROA/SAM=
+github.com/hxfs/go-kms-wrapping/v2 v2.0.5 h1:rOFDv+3k05mnW0oaDLffhVUwg03Csn0mvfO98Wdd2bE=
+github.com/hxfs/go-kms-wrapping/v2 v2.0.5/go.mod h1:sDQAfwJGv25uGPZA04x87ERglCG6avnRcBT9wYoMII8=
 github.com/hashicorp/go-multierror v1.0.0/go.mod h1:dHtQlpGsu+cZNNAkkCN/P3hoUDHhCYQXV3UM06sGGrk=
 github.com/hashicorp/go-multierror v1.1.1 h1:H5DkEtf6CXdFp0N0Em5UCwQpXMWke8IA0+lD48awMYo=
 github.com/hashicorp/go-multierror v1.1.1/go.mod h1:iw975J/qwKPdAO1clOe2L8331t/9/fmwbPZ6JB6eMoM=

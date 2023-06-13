@@ -1,10 +1,10 @@
-module github.com/hashicorp/go-kms-wrapping/examples/cli/plugins/mains/transit
+module github.com/hxfs/go-kms-wrapping/examples/cli/plugins/mains/transit
 
 go 1.18
 
 require (
-	github.com/hashicorp/go-kms-wrapping/plugin/v2 v2.0.2
-	github.com/hashicorp/go-kms-wrapping/wrappers/transit/v2 v2.0.0
+	github.com/hxfs/go-kms-wrapping/plugin/v2 v2.0.2
+	github.com/hxfs/go-kms-wrapping/wrappers/transit/v2 v2.0.0
 )
 
 require (
@@ -19,7 +19,7 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-hclog v1.1.0 // indirect
 	github.com/hashicorp/go-immutable-radix v1.3.1 // indirect
-	github.com/hashicorp/go-kms-wrapping/v2 v2.0.4 // indirect
+	github.com/hxfs/go-kms-wrapping/v2 v2.0.4 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-plugin v1.4.3 // indirect
 	github.com/hashicorp/go-retryablehttp v0.6.6 // indirect

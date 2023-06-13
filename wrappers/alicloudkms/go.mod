@@ -1,10 +1,10 @@
-module github.com/hashicorp/go-kms-wrapping/wrappers/alicloudkms/v2
+module github.com/hxfs/go-kms-wrapping/wrappers/alicloudkms/v2
 
 go 1.17
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1499
-	github.com/hashicorp/go-kms-wrapping/v2 v2.0.0
+	github.com/hxfs/go-kms-wrapping/v2 v2.0.0
 )
 
 require (
