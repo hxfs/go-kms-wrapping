@@ -8,7 +8,7 @@ require (
 	github.com/Azure/go-autorest/autorest/azure/auth v0.5.11
 	github.com/Azure/go-autorest/autorest/to v0.4.0
 	github.com/hashicorp/go-hclog v1.1.0
-	github.com/hxfs/go-kms-wrapping/v2 v2.0.7
+	github.com/hxfs/go-kms-wrapping/v2 v2.10.0
 	github.com/stretchr/testify v1.7.0
 )
 

@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.1499
-	github.com/hxfs/go-kms-wrapping/v2 v2.0.0
+	github.com/hxfs/go-kms-wrapping/v2 v2.10.0 
 )
 
 require (

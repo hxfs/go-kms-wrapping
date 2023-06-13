@@ -3,7 +3,7 @@ module github.com/hxfs/go-kms-wrapping/wrappers/ocikms/v2
 go 1.17
 
 require (
-	github.com/hxfs/go-kms-wrapping/v2 v2.0.7
+	github.com/hxfs/go-kms-wrapping/v2 v2.10.0 
 	github.com/oracle/oci-go-sdk/v60 v60.0.0
 	golang.org/x/net v0.0.0-20220225172249-27dd8689420f
 )

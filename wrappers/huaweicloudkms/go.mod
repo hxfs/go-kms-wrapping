@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
-	github.com/hxfs/go-kms-wrapping/v2 v2.0.0
+	github.com/hxfs/go-kms-wrapping/v2 v2.10.0
 	github.com/huaweicloud/golangsdk v0.0.0-20210831081626-d823fe11ceba
 )
 
