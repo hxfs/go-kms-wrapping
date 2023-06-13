@@ -1,6 +1,6 @@
 module github.com/hxfs/go-kms-wrapping/wrappers/ukms/v2
 
-go 1.19
+go 1.17
 
 require (
 	github.com/hashicorp/go-hclog v1.5.0
