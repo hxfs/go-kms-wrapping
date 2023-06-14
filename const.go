@@ -8,6 +8,7 @@ const (
 	WrapperTypeAead            WrapperType = "aead"
 	WrapperTypeAliCloudKms     WrapperType = "alicloudkms"
 	WrapperTypeAwsKms          WrapperType = "awskms"
+	WrapperTypeUCloudkms       WrapperType = "ukms"
 	WrapperTypeAzureKeyVault   WrapperType = "azurekeyvault"
 	WrapperTypeGcpCkms         WrapperType = "gcpckms"
 	WrapperTypeHsmAuto         WrapperType = "hsm-auto"
